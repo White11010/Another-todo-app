@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './App.module.scss';
 
-const foo = "bar";
-
 function App() {
 	return (
 		<div className={styles.App}>
-			<p>foooooo</p>
+			<p>foo</p>
 		</div>
 	);
 }
+
 
 export default App;
