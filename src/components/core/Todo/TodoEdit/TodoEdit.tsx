@@ -2,19 +2,26 @@ import React from 'react';
 //TODO разобраться с алиасами
 import {ITodo} from '../../../../models/todo.model';
 import TextField from '../../../ui/inputs/TextField/TextField';
-import SubmitButton from '../../../ui/buttons/SubmitButton/SubmitButton';
+import Button from '../../../ui/buttons/Button/Button';
 import {useForm} from '../../../../shared/composables/form.composable';
 import ButtonGroup from '../../../layout/ButtonGroup/ButtonGroup';
-import TextareaField from '../../../ui/inputs/TextareaField/TextareaField';
+import TextareaField from '../../../ui/inputs/Textarea/Textarea';
+import {useLocalStorage} from '../../../../services/storage/local-storage';
+import {useNavigate} from 'react-router-dom';
 
 const TodoEdit = () => {
 	const initialState: ITodo = {
 		title: '',
 		description: '',
+		isCompleted: false,
 	};
 
+	const navigate = useNavigate();
+	const {add} = useLocalStorage<ITodo>('todos');
+
 	const submitHandler = (domainObject: ITodo) => {
-		console.log(domainObject);
+		add(domainObject);
+		navigate('/todos');
 	};
 	
 	const {domainObject, onChange, onSubmit} = useForm<ITodo>(initialState, submitHandler);
@@ -38,9 +45,9 @@ const TodoEdit = () => {
 				onChange={onChange}
 			/>
 			<ButtonGroup>
-				<SubmitButton>
+				<Button type="submit">
 					Submit
-				</SubmitButton>
+				</Button>
 			</ButtonGroup>
 		</form>
 	);

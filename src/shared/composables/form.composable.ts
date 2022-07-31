@@ -1,6 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
 
-export const useForm = <T>(initialState: T, submitHandler: (domainObject: T) => void) => {
+export const useForm = <T>(
+	initialState: T,
+	submitHandler: (domainObject: T) => void,
+	clearOnSubmit= true
+) => {
 	const _initialState: typeof initialState = initialState;
 
 	const [domainObject, setDomainObject] = useState<typeof initialState>(_initialState);
@@ -17,6 +21,9 @@ export const useForm = <T>(initialState: T, submitHandler: (domainObject: T) => 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		submitHandler(domainObject);
+		if (clearOnSubmit) {
+			setDomainObject(initialState);
+		}
 	};
 
 	return {

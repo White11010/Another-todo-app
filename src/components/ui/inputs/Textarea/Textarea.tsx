@@ -9,7 +9,7 @@ interface ITextareaField {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextareaField: React.FC<ITextareaField> = (props: ITextareaField) => {
+const Textarea: React.FC<ITextareaField> = (props: ITextareaField) => {
 	return (
 		<TextField
 			name={props.name}
@@ -23,4 +23,4 @@ const TextareaField: React.FC<ITextareaField> = (props: ITextareaField) => {
 	);
 };
 
-export default TextareaField;
+export default Textarea;
